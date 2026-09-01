@@ -4,10 +4,14 @@ import typescriptLogo from './assets/typescript.svg'
 import viteLogo from './assets/vite.svg'
 import { setupCounter } from './counter.ts'
 import { name } from './bases/01-types.ts'
+import {ids, bulbasaur, pokemones} from './bases/02-objects.ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
-<h1>Hello ${name}</h1>
+<h1>Hello ${name} ${ids.join(',')}</h1>
+<p>${bulbasaur.name}<p/>
+<p>${pokemones}<p/>
+
 <section id="center">
   <div class="hero">
     <img src="${heroImg}" class="base" width="170" height="179">
