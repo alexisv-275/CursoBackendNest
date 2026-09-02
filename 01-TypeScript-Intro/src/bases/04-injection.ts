@@ -1,3 +1,7 @@
+/**
+ * Inyección de dependencias: entrega a una clase lo que necesita para trabajar, manteniéndola independiente de implementaciones concretas.
+ */
+
 import type { Move, PokeapiResponse } from '../interfaces/pokeapi-response.interface';
 import {type Httpdapter, PokeApiAdapter, PokeApiFetchAdapter } from '../api/pokeApi.adapter';
 

@@ -6,16 +6,18 @@ import { setupCounter } from './counter.ts'
 import { name } from './bases/01-types.ts'
 import {ids, bulbasaur, pokemones} from './bases/02-objects.ts'
 // import {charmander} from './bases/03-classes.ts'
-import {charmander} from './bases/04-injection.ts'
+// import {charmander} from './bases/04-injection.ts'
+import {charmander} from './bases/05-decorators.ts'
+
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
+<!--
 <h1>Hello ${name} ${ids.join(',')}</h1>
 <p>${bulbasaur.name}<p/>
 <p>${pokemones}<p/>
-
-<p>${charmander.name} ${charmander.id}<p/>
-<p>${charmander.scream()}<p/>
+-->
+<h1>Hello </h1>
 
 
 <section id="center">
