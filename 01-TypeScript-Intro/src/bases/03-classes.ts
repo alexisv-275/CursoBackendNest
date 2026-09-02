@@ -6,8 +6,8 @@ export class Pokemon {
     /*
     TypeScript tiene la opción strictPropertyInitialization que obliga a inicializar propiedades. El constructor cuenta como inicialización
     */
-   public readonly id: number;
-   public name: string; 
+    public readonly id: number;
+    public name: string; 
 
     constructor(id:number, name:string){
         this.id = id; 

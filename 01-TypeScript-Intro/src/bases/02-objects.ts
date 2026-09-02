@@ -1,9 +1,9 @@
 export const ids = [1,2,3,4];
 //A pesar del error, typescript permite unirlo con el arreglo de números
-ids.push("asjajasj");
+// ids.push("asjajasj");
 //Conversión rápida de String a number 
 ids.push(+'1');
-console.log(ids);
+// console.log(ids);
 
 /*
 Interfaces
@@ -25,7 +25,7 @@ export const charmander:Pokemon = {
     name: "Charmander"
 }
 
-console.log(bulbasaur);
+// console.log(bulbasaur);
 
 //Al momento de trabajar con un arreglo es necesario especificar que la interfaz será un arreglo de objetos (Pokemon[])
 
@@ -33,7 +33,7 @@ export const pokemones: Pokemon[]= [];
 
 pokemones.push(charmander, bulbasaur); 
 
-console.log(pokemones);
+// console.log(pokemones);
 
 
 
