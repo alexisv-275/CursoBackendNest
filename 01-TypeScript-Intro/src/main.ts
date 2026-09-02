@@ -14,7 +14,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <p>${pokemones}<p/>
 
 <p>${charmander.name} ${charmander.id}<p/>
-// <p>${charmander.scream()}<p/>
+<p>${charmander.scream()}<p/>
 
 
 <section id="center">
