@@ -28,9 +28,10 @@ export class Pokemon {
     scream(){
         console.log(`${this.name.toUpperCase()}!!!!!`);
     }
+    //El decorador permite mantener speak() funcionando, pero avisa que debería reemplazarse por otro método
     @Deprecated('Most use speak2 method instead')
     speak(){
-        console.log(`${this.name}`);
+        console.log(`${this.name} hola hola`);
     }
 }
     
