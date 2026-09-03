@@ -7,7 +7,8 @@ import { name } from './bases/01-types.ts'
 import {ids, bulbasaur, pokemones} from './bases/02-objects.ts'
 // import {charmander} from './bases/03-classes.ts'
 // import {charmander} from './bases/04-injection.ts'
-import {charmander} from './bases/05-decorators.ts'
+// import {charmander} from './bases/05-decorators.ts'
+import {charmander} from './bases/06-decorators2.ts'
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -18,6 +19,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <p>${pokemones}<p/>
 -->
 <h1>Hello </h1>
+<p>${charmander.speak()}</p>
 
 
 <section id="center">
