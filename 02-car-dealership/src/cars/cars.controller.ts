@@ -41,16 +41,13 @@ export class CarsController {
     //Decorador para definir el body 
     updateCar(
         @Param('id', ParseUUIDPipe) id:string,
-        @Body() UpdateCarDTO: UpdateCarDto){
-        return UpdateCarDTO;
+        @Body() updateCarDTO: UpdateCarDto){
+        return this.carsService.update(id, updateCarDTO);;
     }
 
     @Delete(':id')
-    deleteCar(@Param('id', ParseIntPipe) id:number){
-        return{
-            method: 'delete', 
-            id
-        }
+    deleteCar(@Param('id', ParseUUIDPipe) id:string){
+        return this.carsService.delete(id);
     }
         
 }
