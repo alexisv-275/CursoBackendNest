@@ -27,7 +27,7 @@ export class CarsService {
         return this.cars;
     }
 
-    findById(id:string) {
+    findOne(id:string) {
         const car = this.cars.find(car => car.id === id); 
 
         //Usando ExceptionFilters: NotFoundException
@@ -40,7 +40,7 @@ export class CarsService {
 
     update(id:string, updateCarDto: UpdateCarDto){
         // Busca el auto actual para conservar sus datos no enviados en el PATCH.
-        let carDB = this.findById(id);
+        let carDB = this.findOne(id);
 
         // Si el body trae un id, debe coincidir con el id de la URL.
         if(updateCarDto.id && updateCarDto.id !== id)
@@ -90,7 +90,7 @@ export class CarsService {
 
     delete(id:string){
         //Verificacion si el auto existe
-        const car = this.findById(id);
+        const car = this.findOne(id);
         this.cars  = this.cars.filter(car => car.id !== id);
     }
 }

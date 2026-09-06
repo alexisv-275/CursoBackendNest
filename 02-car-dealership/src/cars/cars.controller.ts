@@ -24,7 +24,7 @@ export class CarsController {
         console.log({id: id});
         // throw new Error('AYUDAAAAA');
         
-        return this.carsService.findById(id); 
+        return this.carsService.findOne(id); 
         // return {
         //     car : this.cars[Number(id)],
         // }
