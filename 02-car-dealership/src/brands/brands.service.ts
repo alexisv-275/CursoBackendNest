@@ -8,11 +8,11 @@ import { NotFoundError } from 'rxjs';
 @Injectable()
 export class BrandsService {
   private brands: Brand[] = [
-    {
-      id: uuid(),
-      name: 'Toyota',
-      createdAt: new Date().getTime()
-    }
+    // {
+    //   id: uuid(),
+    //   name: 'Toyota',
+    //   createdAt: new Date().getTime()
+    // }
   ];
 
   create({name}: CreateBrandDto) {
@@ -61,7 +61,7 @@ export class BrandsService {
   }
 
   
-      fillCarsWithSeedData(brands:Brand[]){
+      fillBrandsWithSeedData(brands:Brand[]){
           this.brands= brands;
       }
 }
