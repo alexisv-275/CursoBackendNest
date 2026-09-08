@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  //Necesario para que los class validator funcionen ya que estos son los que interceptan la data
   app.useGlobalPipes(  
     new ValidationPipe({ 
       //Solo deja la data que estoy esperando pero sigue recibiendo el mensaje
