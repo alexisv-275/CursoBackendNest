@@ -92,7 +92,16 @@ export class PokemonService {
     if(deletedCount === 0)
       throw new BadRequestException(`Pokemon with id "${id}" not found`)
     return;
+    
+  }
+  
+  async removeAll(){
+    await this.pokemonModel.deleteMany();
+    return;
+  }
 
+  async insertAll(pokemonToInsert: CreatePokemonDto[]) {
+    await this.pokemonModel.insertMany(pokemonToInsert)
   }
 
   private handleExceptions(error:any){
