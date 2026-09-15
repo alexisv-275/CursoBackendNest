@@ -13,6 +13,10 @@ async function bootstrap() {
       whitelist: true, 
       //No permite recibir el mensaje si tiene data que no se espera
       forbidNonWhitelisted: true, 
+      transform:true, 
+      transformOptions:{
+        enableImplicitConversion:true,
+      }
     }) 
   );
   await app.listen(process.env.PORT ?? 3000);
