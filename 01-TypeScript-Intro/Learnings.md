@@ -95,6 +95,10 @@ const charmander = new Pokemon(4, 'Charmander', pokeApiAxios);
 const pokeApiFetch = new PokeApiFetchAdapter();
 const otroPokemon = new Pokemon(4, 'Charmander', pokeApiFetch);
 ```
+<img width="558" height="407" alt="image" src="https://github.com/user-attachments/assets/a7cf8a56-7ef2-4172-ae8d-6b1683a2e43a" />
+
+<img width="695" height="539" alt="image" src="https://github.com/user-attachments/assets/51650236-723c-4b84-b231-ddae4b3b1212" />
+
 
 La ventaja no es solo la extensibilidad. `Pokemon` queda desacoplado de Axios y Fetch: conoce el método `get`, pero no necesita conocer cómo se implementa. Esto facilita cambiar la biblioteca HTTP, probar la clase con un objeto simulado (mock) o agregar otra implementación.
 
@@ -104,6 +108,9 @@ En este archivo aparecen dos ideas relacionadas, pero distintas:
 2. **Adaptador:** `PokeApiAdapter` y `PokeApiFetchAdapter` traducen el modo particular de trabajar de Axios o Fetch a una interfaz común (`Httpdapter`). Ambos implementan el mismo contrato, por lo que `Pokemon` puede usarlos indistintamente.
 
 Así que el adaptador no está ahí por casualidad: permite que dos APIs diferentes se presenten de la misma manera ante `Pokemon`. La interfaz `Httpdapter` es el contrato; las clases `PokeApiAdapter` y `PokeApiFetchAdapter` son implementaciones/adaptadores; y el constructor de `Pokemon` es el punto donde se inyecta la dependencia.
+
+<img width="1084" height="593" alt="image" src="https://github.com/user-attachments/assets/a3445ea9-c287-405e-af46-72959dc5388c" />
+
 
 ### Resumen
 
