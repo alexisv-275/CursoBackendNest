@@ -5,11 +5,13 @@ import { Mongoose } from 'mongoose';
 // Conecta NestJS con MongoDB y permite registrar modelos de Mongoose.
 import { MongooseModule } from '@nestjs/mongoose';
 import { Pokemon, PokemonSchema } from './entities/pokemon.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   controllers: [PokemonController],
   providers: [PokemonService],
   imports:[
+    ConfigModule,
     // Relaciona Pokemon con su esquema para acceder a la colección de Pokémon.
     MongooseModule.forFeature([
     {

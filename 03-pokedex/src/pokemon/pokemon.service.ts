@@ -7,6 +7,7 @@ import { InjectConnection } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { log } from 'console';
 import { PaginationDto } from '../common/dto/pagination.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
@@ -15,8 +16,15 @@ export class PokemonService {
     //Decorador para poder inyectar modelos en servicios de NestJS
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
+    private readonly configService : ConfigService
     
-  ){}
+  ){
+    // console.log(process.env.DEFAULT_LIMIT);
+    const defaultLimit = configService.get<number>('defaultLimit');  
+    // console.log(defaultLimit);
+    
+    
+  }
 
   async create(createPokemonDto: CreatePokemonDto) {
     // Convierte el nombre a minúsculas antes de guardarlo en la base de datos.
@@ -34,7 +42,7 @@ export class PokemonService {
 
   findAll(paginationDTO: PaginationDto) {
     
-    const {limit=10, offset = 0}=  paginationDTO;
+    const {limit=this.configService.get<number>('defaultLimit', 7), offset = 0}=  paginationDTO;
 
     return this.pokemonModel.find() 
       .limit(limit)
