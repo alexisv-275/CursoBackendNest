@@ -6,32 +6,41 @@
 
 1. Clonar el repositorio:
 
-```bash
+```
 git clone <URL_DEL_REPOSITORIO>
 cd 03-pokedex
 ```
+2. Ejecutar
+```
+yarn install
+```
 
-2. Instalar Nest CLI:
 
-```bash
+3. Instalar Nest CLI:
+```
 npm i -g @nestjs/cli
 ```
 
-3. Levantar la base de datos:
 
-```bash
+4. Levantar la base de datos:
+
+```
 docker compose up -d
 ```
 
-4. Ejecutar la aplicación:
+5. Clonar el archivo __.env.template__ y renombrar a copia a __.env__
 
-```bash
+6. Llenar las variables de entorno definidas en el __.env__
+
+7. Ejecutar la aplicación en dev: 
+```
 yarn start:dev
 ```
 
-5. Reconstruir la base de datos con la semilla
 
-```bash
+8. Reconstruir la base de datos con la semilla
+
+```
 localhost:3000/api/v2/seed
 ```
 

@@ -200,3 +200,88 @@ SeedService
 	-> SeedService prepara los datos
 	-> PokemonService los inserta en MongoDB
 ```
+
+## 6. Configuracion y validacion de variables de entorno
+
+Las variables de entorno se definen en el archivo `.env`, por ejemplo:
+
+```env
+MONGODB=mongodb://localhost:27017/nest-pokemon
+PORT=3000
+DEFAULT_LIMIT=5
+```
+
+### `EnvConfiguration`
+
+`EnvConfiguration` transforma las variables de entorno en un objeto de configuracion con nombres de clave propios de la aplicacion:
+
+```ts
+export const EnvConfiguration = () => ({
+	environment: process.env.NODE_ENV || 'dev',
+	mongodb: process.env.MONGODB,
+	port: process.env.PORT || 3002,
+	defaultLimit: process.env.DEFAULT_LIMIT || 7,
+});
+```
+
+Se registra en `ConfigModule.forRoot()` mediante `load`:
+
+```ts
+ConfigModule.forRoot({
+	isGlobal: true,
+	load: [EnvConfiguration],
+	validationSchema: JoiValidationSchema,
+});
+```
+
+Gracias a este mapeo, el resto de la aplicacion puede consultar `mongodb`, `port` y `defaultLimit` con `ConfigService`, sin depender directamente de `process.env`.
+
+Por ejemplo, la conexion a MongoDB utiliza la clave mapeada `mongodb`:
+
+```ts
+MongooseModule.forRootAsync({
+	imports: [ConfigModule],
+	inject: [ConfigService],
+	useFactory: (configService: ConfigService) => ({
+		uri: configService.getOrThrow<string>('mongodb'),
+	}),
+});
+```
+
+`forRootAsync` permite obtener la configuracion despues de que Nest haya cargado el archivo `.env`. `getOrThrow()` garantiza que la aplicacion falle con un error claro si falta la URI de MongoDB, en lugar de enviar `undefined` a Mongoose.
+
+### `JoiValidationSchema`
+
+`JoiValidationSchema` valida las variables originales del entorno cuando se inicia la aplicacion:
+
+```ts
+export const JoiValidationSchema = Joi.object({
+	MONGODB: Joi.required(),
+	PORT: Joi.number().default(3005),
+	DEFAULT_LIMIT: Joi.number().default(6),
+});
+```
+
+- `MONGODB` es obligatoria. Sin ella, la aplicacion no debe iniciar.
+- `PORT` debe ser un numero y usa `3005` si no fue definida.
+- `DEFAULT_LIMIT` debe ser un numero y usa `6` si no fue definido.
+
+Joi valida las claves originales (`MONGODB`, `PORT` y `DEFAULT_LIMIT`), mientras que `EnvConfiguration` expone las claves transformadas (`mongodb`, `port` y `defaultLimit`). No se deben mezclar ambos nombres al consultar con `ConfigService`.
+
+Es importante recordar que `process.env` siempre recibe valores como texto. El tipo generico de `ConfigService`, por ejemplo `get<number>()`, no convierte el texto automaticamente ni garantiza que exista el valor. Cuando se necesite un numero real en `EnvConfiguration`, hay que convertirlo explicitamente:
+
+```ts
+port: Number(process.env.PORT ?? 3002),
+defaultLimit: Number(process.env.DEFAULT_LIMIT ?? 7),
+```
+
+El flujo de configuracion queda asi:
+
+```text
+.env
+	-> ConfigModule carga las variables
+	-> JoiValidationSchema valida las claves originales
+	-> EnvConfiguration mapea las claves para la aplicacion
+	-> ConfigService entrega los valores a los modulos y servicios
+	-> Mongoose usa mongodb y PokemonService usa defaultLimit
+```
