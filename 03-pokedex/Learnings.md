@@ -285,3 +285,13 @@ El flujo de configuracion queda asi:
 	-> ConfigService entrega los valores a los modulos y servicios
 	-> Mongoose usa mongodb y PokemonService usa defaultLimit
 ```
+
+## 7. Conexion con MongoDB Atlas
+
+La URI de Atlas puede incluir el nombre de la base de datos:
+
+```env
+MONGODB=mongodb+srv://usuario:password@cluster.mongodb.net/pokedex?retryWrites=true&w=majority
+```
+
+Al incluir `/pokedex` en la URI, `MongooseModule.forRootAsync` usa esa base mediante `ConfigService` y no es necesario agregar `dbName` por separado.
